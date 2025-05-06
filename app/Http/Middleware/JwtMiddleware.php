@@ -17,16 +17,14 @@ class JwtMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        try {
+        try{
             $user = JWTAuth::parseToken()->authenticate();
-        } catch (JWTException $e) {
+        }catch(JWTException $e){
             return response()->json(
                 [
-                    'status'  => false,
-                    'message'  => 'Token tidak valid'
-                ],
-                401
-            );
+                    'status'    => false, 
+                    'message'   => 'Token tidak valid'
+                ],401);
         }
         return $next($request);
     }
